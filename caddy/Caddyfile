@@ -1,0 +1,24 @@
+# Caddy serves HTTPS with a local self-signed CA (required for browser mic access).
+# First-time phone setup: install Caddy's root CA cert on the phone.
+# On Pi: sudo cat /root/.local/share/caddy/pki/authorities/local/root.crt
+# Copy that cert to the phone and install it as a trusted CA.
+# iOS: AirDrop .crt file → Settings → General → VPN & Device Management → install
+# Android: Settings → Security → Install from storage
+
+{
+    local_certs
+    auto_https disable_redirects
+}
+
+:443 {
+    tls internal
+
+    # API and WebSocket go to FastAPI
+    reverse_proxy /api/* localhost:8000
+    reverse_proxy /ws/* localhost:8000
+
+    # Everything else is served as static files
+    file_server {
+        root /opt/japanesetutor/frontend
+    }
+}

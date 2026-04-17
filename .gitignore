@@ -1,0 +1,18 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+venv/
+.env
+
+# Models (large binary files — download via setup.sh)
+models/vosk/
+models/piper/
+
+# Runtime data
+data/tutor.db
+data/tts_cache/
+
+# OS
+.DS_Store
+Thumbs.db
