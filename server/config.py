@@ -2,6 +2,7 @@ import os
 from pathlib import Path
 
 BASE_DIR = Path(os.environ.get("TUTOR_BASE_DIR", "/opt/japanesetutor"))
+FRONTEND_DIR = str(BASE_DIR / "frontend")
 
 VOSK_MODEL_PATH = str(BASE_DIR / "models/vosk/vosk-model-ja-0.22")
 DB_PATH = str(BASE_DIR / "data/tutor.db")

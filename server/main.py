@@ -6,7 +6,7 @@ from server.services.stt import load_model
 from server.database import init_db
 from server.routers import kana
 from server.ws.audio_handler import stt_websocket
-from server.config import BASE_DIR
+from server.config import BASE_DIR, FRONTEND_DIR
 
 logging.basicConfig(level=logging.INFO, format="%(levelname)s %(name)s: %(message)s")
 
@@ -20,6 +20,7 @@ async def lifespan(app: FastAPI):
 
 app = FastAPI(lifespan=lifespan)
 app.include_router(kana.router)
+app.mount("/", StaticFiles(directory=FRONTEND_DIR, html=True), name="frontend")
 
 
 @app.websocket("/ws/stt")

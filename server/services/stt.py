@@ -11,8 +11,11 @@ _model: Model | None = None
 def load_model() -> None:
     global _model
     logger.info("Loading Vosk model from %s — this may take 10-15s", VOSK_MODEL_PATH)
-    _model = Model(VOSK_MODEL_PATH)
-    logger.info("Vosk model loaded")
+    try:
+        _model = Model(VOSK_MODEL_PATH)
+        logger.info("Vosk model loaded")
+    except Exception as e:
+        logger.warning("Vosk model not loaded (%s) — STT unavailable", e)
 
 
 def get_model() -> Model:
