@@ -3,7 +3,7 @@
 # Run once with internet access, then deploy offline to car.
 set -euo pipefail
 
-INSTALL_DIR="/opt/japanesetutor"
+INSTALL_DIR="$(cd "$(dirname "$0")/.." && pwd)"
 VOSK_MODEL="vosk-model-ja-0.22"
 VOSK_URL="https://alphacephei.com/vosk/models/${VOSK_MODEL}.zip"
 PIPER_VERSION="v1.2.0"
@@ -69,11 +69,9 @@ sudo cp "$(dirname "$0")/../caddy/Caddyfile" /etc/caddy/Caddyfile
 sudo systemctl enable caddy
 
 # ── 4. App directory ──
-sudo mkdir -p "${INSTALL_DIR}/models/vosk"
-sudo mkdir -p "${INSTALL_DIR}/models/piper"
-sudo mkdir -p "${INSTALL_DIR}/data/tts_cache"
-sudo cp -r "$(dirname "$0")/.." "${INSTALL_DIR}"
-sudo chown -R pi:pi "${INSTALL_DIR}"
+mkdir -p "${INSTALL_DIR}/models/vosk"
+mkdir -p "${INSTALL_DIR}/models/piper"
+mkdir -p "${INSTALL_DIR}/data/tts_cache"
 
 # ── 5. Python venv ──
 python3 -m venv "${INSTALL_DIR}/venv"
