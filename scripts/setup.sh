@@ -20,7 +20,15 @@ sudo apt install -y \
     build-essential
 
 # ── 2. Wi-Fi hotspot ──
-sudo apt install -y hostapd dnsmasq
+sudo apt install -y hostapd dnsmasq ifupdown
+
+# Stop NetworkManager managing wlan0 so hostapd can take over
+sudo mkdir -p /etc/NetworkManager/conf.d
+sudo tee /etc/NetworkManager/conf.d/10-unmanaged-wlan0.conf > /dev/null <<'EOF'
+[keyfile]
+unmanaged-devices=interface-name:wlan0
+EOF
+sudo systemctl reload NetworkManager 2>/dev/null || true
 
 sudo tee /etc/hostapd/hostapd.conf > /dev/null <<'EOF'
 interface=wlan0
@@ -47,6 +55,7 @@ dhcp-range=192.168.50.10,192.168.50.100,255.255.255.0,24h
 EOF
 
 # Static IP for wlan0
+sudo mkdir -p /etc/network/interfaces.d
 sudo tee /etc/network/interfaces.d/wlan0 > /dev/null <<'EOF'
 allow-hotplug wlan0
 iface wlan0 inet static
