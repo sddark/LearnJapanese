@@ -7,11 +7,73 @@
   <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-  <main class="stub-page">
-    <span class="stub-icon">📊</span>
-    <span class="stub-label">Progress</span>
-    <span class="stub-note">Coming in Phase 2</span>
+  <main class="progress-page">
+    <header class="page-header">
+      <span class="page-title-small">Progress</span>
+    </header>
+
+    <div class="progress-content">
+
+      <!-- Due today -->
+      <section class="progress-section">
+        <h2 class="section-title">Due Today</h2>
+        <div class="due-row">
+          <span class="due-label">Words</span>
+          <span class="due-count" id="words-due">—</span>
+        </div>
+        <div class="due-row">
+          <span class="due-label">Kana</span>
+          <span class="due-count" id="kana-due">—</span>
+        </div>
+      </section>
+
+      <!-- Vocabulary -->
+      <section class="progress-section">
+        <h2 class="section-title">Vocabulary</h2>
+        <div class="level-row">
+          <span class="level-label">N5</span>
+          <span class="level-count" id="n5-known">— / —</span>
+        </div>
+        <div class="progress-bar-track">
+          <div class="progress-bar-fill known"    id="n5-known-bar"></div>
+          <div class="progress-bar-fill learning" id="n5-learning-bar"></div>
+        </div>
+        <div class="level-sub" id="n5-learning"></div>
+      </section>
+
+      <!-- Kana -->
+      <section class="progress-section">
+        <h2 class="section-title">Kana</h2>
+
+        <div class="level-row">
+          <span class="level-label">Hiragana</span>
+          <span class="level-count" id="hira-count">— / 46</span>
+        </div>
+        <div class="progress-bar-track">
+          <div class="progress-bar-fill known"    id="hira-known-bar"></div>
+          <div class="progress-bar-fill learning" id="hira-learning-bar"></div>
+        </div>
+
+        <div class="level-row" style="margin-top:16px">
+          <span class="level-label">Katakana</span>
+          <span class="level-count" id="kata-count">— / 46</span>
+        </div>
+        <div class="progress-bar-track">
+          <div class="progress-bar-fill known"    id="kata-known-bar"></div>
+          <div class="progress-bar-fill learning" id="kata-learning-bar"></div>
+        </div>
+      </section>
+
+      <!-- Streak -->
+      <section class="progress-section streak-section">
+        <span class="streak-icon">🔥</span>
+        <span class="streak-count" id="streak-count">—</span>
+        <span class="streak-label">day streak</span>
+      </section>
+
+    </div>
   </main>
+
   <nav class="tab-bar">
     <a href="/conversation.html" class="tab">
       <span class="tab-icon">💬</span><span class="tab-label">Chat</span>
@@ -26,5 +88,8 @@
       <span class="tab-icon">📊</span><span class="tab-label">Stats</span>
     </a>
   </nav>
+
+  <script src="/js/api.js"></script>
+  <script src="/js/progress.js"></script>
 </body>
 </html>

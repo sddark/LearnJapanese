@@ -7,11 +7,33 @@
   <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-  <main class="stub-page">
-    <span class="stub-icon">📚</span>
-    <span class="stub-label">Word Quiz</span>
-    <span class="stub-note">Coming in Phase 2</span>
+  <main class="drill-page">
+    <header class="page-header">
+      <span class="page-title-small">Word Quiz</span>
+      <span class="session-count" id="quiz-mode-label"></span>
+    </header>
+
+    <div class="card-area">
+      <div class="quiz-emoji" id="quiz-emoji">…</div>
+      <div class="quiz-meaning" id="quiz-meaning">Loading…</div>
+      <div class="quiz-done-msg" id="quiz-done" style="display:none">All done for today! 🎉</div>
+    </div>
+
+    <div class="choice-grid" id="choice-grid" style="display:none"></div>
+
+    <div class="speak-area" id="speak-area" style="display:none">
+      <div class="transcript-area" id="quiz-transcript"></div>
+      <button id="quiz-speak-btn" class="speak-button" disabled>🎤 SPEAK</button>
+    </div>
+
+    <div class="feedback" id="quiz-feedback"></div>
+
+    <div class="quiz-actions">
+      <button id="quiz-show-btn" class="action-btn">Show answer</button>
+      <button id="quiz-skip-btn" class="action-btn">Skip</button>
+    </div>
   </main>
+
   <nav class="tab-bar">
     <a href="/conversation.html" class="tab">
       <span class="tab-icon">💬</span><span class="tab-label">Chat</span>
@@ -26,5 +48,9 @@
       <span class="tab-icon">📊</span><span class="tab-label">Stats</span>
     </a>
   </nav>
+
+  <script src="/js/api.js"></script>
+  <script src="/js/audio.js"></script>
+  <script src="/js/quiz.js"></script>
 </body>
 </html>

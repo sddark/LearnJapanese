@@ -157,6 +157,160 @@ main {
 .speak-button:active  { transform: scale(0.96); opacity: 0.85; }
 .speak-button:disabled { opacity: 0.35; cursor: default; }
 
+/* ── Quiz ── */
+.quiz-emoji {
+  font-size: clamp(72px, 22vw, 140px);
+  line-height: 1;
+  user-select: none;
+}
+
+.quiz-meaning {
+  font-size: clamp(18px, 5vw, 26px);
+  color: var(--text-dim);
+  text-align: center;
+  padding: 0 24px;
+}
+
+.quiz-done-msg {
+  font-size: 22px;
+  color: var(--accent);
+  text-align: center;
+}
+
+.choice-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  padding: 0 24px 8px;
+}
+
+.choice-btn {
+  padding: 20px 12px;
+  border-radius: 14px;
+  border: 2px solid #333;
+  background: var(--surface2);
+  color: var(--text);
+  font-size: clamp(18px, 5vw, 26px);
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s;
+  touch-action: manipulation;
+}
+
+.choice-btn:active    { background: #333; }
+.choice-btn.correct   { border-color: var(--correct);   background: #1b3a1b; color: var(--correct); }
+.choice-btn.incorrect { border-color: var(--incorrect); background: #3a1b1b; color: var(--incorrect); }
+.choice-btn:disabled  { cursor: default; }
+
+.speak-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 0 24px 8px;
+}
+
+.quiz-actions {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  padding: 8px 24px 16px;
+}
+
+.action-btn {
+  padding: 10px 24px;
+  border-radius: 20px;
+  border: 1px solid #444;
+  background: transparent;
+  color: var(--text-dim);
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.action-btn:active { background: var(--surface2); }
+
+/* ── Progress ── */
+.progress-page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  padding-bottom: var(--tab-h);
+}
+
+.progress-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.progress-section {
+  background: var(--surface);
+  border-radius: 16px;
+  padding: 20px;
+}
+
+.section-title {
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-dim);
+  margin-bottom: 14px;
+}
+
+.level-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 8px;
+}
+
+.level-label { font-size: 17px; font-weight: 600; }
+.level-count { font-size: 15px; color: var(--accent); }
+.level-sub   { font-size: 13px; color: var(--text-dim); margin-top: 6px; }
+
+.progress-bar-track {
+  height: 10px;
+  background: var(--surface2);
+  border-radius: 5px;
+  overflow: hidden;
+  display: flex;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  width: 0;
+  transition: width 0.4s ease;
+  flex-shrink: 0;
+}
+
+.progress-bar-fill.learning { background: #f4a321; }
+.progress-bar-fill.known    { background: var(--correct); }
+
+.due-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 6px 0;
+  border-bottom: 1px solid #333;
+}
+
+.due-row:last-child { border-bottom: none; }
+.due-label { color: var(--text-dim); font-size: 16px; }
+.due-count { font-size: 20px; font-weight: 700; color: var(--accent); }
+
+.streak-section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.streak-icon  { font-size: 36px; }
+.streak-count { font-size: 48px; font-weight: 700; color: var(--accent); }
+.streak-label { font-size: 18px; color: var(--text-dim); }
+
 /* ── Stub pages (Phase 2/3 placeholders) ── */
 .stub-page {
   flex: 1;

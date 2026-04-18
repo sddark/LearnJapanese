@@ -4,7 +4,7 @@ from fastapi import FastAPI, WebSocket
 from fastapi.staticfiles import StaticFiles
 from server.services.stt import load_model
 from server.database import init_db
-from server.routers import kana
+from server.routers import kana, words, quiz, progress
 from server.ws.audio_handler import stt_websocket
 from server.config import BASE_DIR, FRONTEND_DIR
 
@@ -20,6 +20,9 @@ async def lifespan(app: FastAPI):
 
 app = FastAPI(lifespan=lifespan)
 app.include_router(kana.router)
+app.include_router(words.router)
+app.include_router(quiz.router)
+app.include_router(progress.router)
 app.mount("/", StaticFiles(directory=FRONTEND_DIR, html=True), name="frontend")
 
 
