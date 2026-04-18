@@ -68,13 +68,28 @@ sudo systemctl enable hostapd dnsmasq
 echo "Hotspot configured — SSID: JapaneseTutor, IP: 192.168.50.1"
 
 # ── 3. Caddy ──
-curl -1sLf 'https://dl.cloudsmith.io/public/caddy/stable/gpg.key' \
-    | sudo gpg --dearmor -o /usr/share/keyrings/caddy-stable-archive-keyring.gpg
-curl -1sLf 'https://dl.cloudsmith.io/public/caddy/stable/debian.deb.txt' \
-    | sudo tee /etc/apt/sources.list.d/caddy-stable.list
-sudo apt update && sudo apt install -y caddy
+CADDY_VERSION="v2.11.2"
+curl -L "https://github.com/caddyserver/caddy/releases/download/${CADDY_VERSION}/caddy_${CADDY_VERSION#v}_linux_arm64.tar.gz" \
+    -o /tmp/caddy.tar.gz
+sudo tar -xzf /tmp/caddy.tar.gz -C /usr/local/bin caddy
+sudo chmod +x /usr/local/bin/caddy
+rm /tmp/caddy.tar.gz
 
-sudo cp "$(dirname "$0")/../caddy/Caddyfile" /etc/caddy/Caddyfile
+sudo tee /etc/systemd/system/caddy.service > /dev/null <<EOF
+[Unit]
+Description=Caddy HTTPS Server
+After=network.target japanesetutor.service
+
+[Service]
+User=root
+Environment=TUTOR_BASE_DIR=${INSTALL_DIR}
+ExecStart=/usr/local/bin/caddy run --config ${INSTALL_DIR}/caddy/Caddyfile
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
+EOF
 sudo systemctl enable caddy
 
 # ── 4. App directory ──

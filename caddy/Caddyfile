@@ -19,6 +19,6 @@
 
     # Everything else is served as static files
     file_server {
-        root /opt/japanesetutor/frontend
+        root {$TUTOR_BASE_DIR}/frontend
     }
 }
