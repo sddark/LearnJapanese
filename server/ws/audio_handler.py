@@ -10,7 +10,12 @@ async def stt_websocket(websocket: WebSocket):
     Client sends text "STOP" to flush final result and close.
     """
     await websocket.accept()
-    session = STTSession()
+    try:
+        session = STTSession()
+    except RuntimeError:
+        await websocket.send_json({"type": "error", "text": "STT unavailable"})
+        await websocket.close()
+        return
     try:
         while True:
             data = await websocket.receive()

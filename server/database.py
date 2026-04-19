@@ -70,6 +70,27 @@ def init_db():
             CREATE INDEX IF NOT EXISTS idx_words_status ON words(status);
             CREATE INDEX IF NOT EXISTS idx_words_next_review ON words(next_review);
             CREATE INDEX IF NOT EXISTS idx_words_jlpt ON words(jlpt_level);
+
+            CREATE TABLE IF NOT EXISTS conversation_sessions (
+                id         INTEGER PRIMARY KEY AUTOINCREMENT,
+                topic      TEXT,
+                turn_count INTEGER NOT NULL DEFAULT 0,
+                created_at TEXT NOT NULL DEFAULT (datetime('now')),
+                updated_at TEXT NOT NULL DEFAULT (datetime('now'))
+            );
+
+            CREATE TABLE IF NOT EXISTS conversation_turns (
+                id              INTEGER PRIMARY KEY AUTOINCREMENT,
+                session_id      INTEGER NOT NULL REFERENCES conversation_sessions(id),
+                turn_number     INTEGER NOT NULL,
+                ai_japanese     TEXT NOT NULL,
+                ai_english      TEXT NOT NULL,
+                user_transcript TEXT,
+                target_word_id  INTEGER REFERENCES words(id),
+                correct         INTEGER,
+                correction      TEXT,
+                created_at      TEXT NOT NULL DEFAULT (datetime('now'))
+            );
         """)
         _seed_kana(conn)
         _seed_words(conn)

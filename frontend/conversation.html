@@ -3,15 +3,26 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-  <title>Conversation — Japanese Tutor</title>
+  <title>Chat — Japanese Tutor</title>
   <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-  <main class="stub-page">
-    <span class="stub-icon">💬</span>
-    <span class="stub-label">Conversation</span>
-    <span class="stub-note">Coming in Phase 3</span>
+  <main class="chat-page">
+    <header class="page-header">
+      <span class="page-title-small">Conversation</span>
+      <button id="toggle-english" class="icon-btn">EN</button>
+    </header>
+
+    <div class="chat-thread" id="chat-thread">
+      <div class="chat-status" id="chat-status">Starting session…</div>
+    </div>
+
+    <div class="chat-controls">
+      <div class="chat-transcript" id="chat-transcript"></div>
+      <button id="chat-speak-btn" class="speak-button" disabled>🎤 SPEAK</button>
+    </div>
   </main>
+
   <nav class="tab-bar">
     <a href="/conversation.html" class="tab active">
       <span class="tab-icon">💬</span><span class="tab-label">Chat</span>
@@ -26,5 +37,9 @@
       <span class="tab-icon">📊</span><span class="tab-label">Stats</span>
     </a>
   </nav>
+
+  <script src="/js/api.js"></script>
+  <script src="/js/audio.js"></script>
+  <script src="/js/conversation.js"></script>
 </body>
 </html>
